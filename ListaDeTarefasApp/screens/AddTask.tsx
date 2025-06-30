@@ -15,13 +15,11 @@ export default function AddTask({ navigation }: any) {
       id: Date.now().toString(),
       title: titulo,
       description: descricao,
-      done:false,
+      done: false,
     };
 
-    // Volta para a tela Home e envia a nova tarefa
     navigation.navigate('Home', { novaTarefa });
 
-    // Limpa os campos
     setTitulo('');
     setDescricao('');
   }
@@ -38,10 +36,11 @@ export default function AddTask({ navigation }: any) {
       />
 
       <TextInput
-        style={styles.input}
+        style={[styles.input, { height: 100, textAlignVertical: 'top' }]}
         placeholder="Descrição"
         value={descricao}
         onChangeText={setDescricao}
+        multiline
       />
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
