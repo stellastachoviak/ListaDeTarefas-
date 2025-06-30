@@ -1,63 +1,50 @@
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert,  } from 'react-native';
-import { useState, useEffect } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 
+export default function AddTask({ navigation }: any) {
+  const [titulo, setTitulo] = useState('');
+  const [descricao, setDescricao] = useState('');
 
-export default function AddTask({ navigation }:any) {
-  const [Titulo, setTitulo] = useState('');
-  const [Descricao, setDescricao] = useState('');
-  useEffect(()=>{
-    console.log('AddTask montada!');
-    return()=> {
-      console.log('AddTask desmontada!')
+  function handleSubmit() {
+    if (!titulo.trim()) {
+      Alert.alert('Erro', 'O título não pode estar vazio!');
+      return;
+    }
+
+    const novaTarefa = {
+      id: Date.now().toString(),
+      title: titulo,
+      description: descricao,
     };
-  },[])
-  
 
-  function handleSubmit(): void {
-    throw new Error('Function not implemented.');
+    // Volta para a tela Home e envia a nova tarefa
+    navigation.navigate('Home', { novaTarefa });
+
+    // Limpa os campos
+    setTitulo('');
+    setDescricao('');
   }
 
   return (
     <View style={styles.container}>
-      
-      <Text style={styles.title}>Formulário</Text>
-      
-    <View style={styles.formContainer}>
+      <Text style={styles.title}>Adicionar Nova Tarefa</Text>
+
       <TextInput
-          style={styles.input}
-          placeholder="Título da tarefa"
-          value={Titulo}
-          onChangeText={setTitulo}
+        style={styles.input}
+        placeholder="Título"
+        value={titulo}
+        onChangeText={setTitulo}
       />
 
       <TextInput
-          style={styles.input}
-          placeholder="Descrição"
-          value={Descricao}
-          onChangeText={setDescricao}
+        style={styles.input}
+        placeholder="Descrição"
+        value={descricao}
+        onChangeText={setDescricao}
       />
 
-      <TouchableOpacity style={styles.button} onPress={AddTask}>
-          <Text style={styles.buttonText}>Adicionar Tarefa</Text>
-      </TouchableOpacity>
-                </View>
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Enviar</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity 
-      style={[styles.button, { backgroundColor: '#dc3545' }]} 
-      onPress={() => navigation.navigate('Home')}
-      >
-        <Text style={styles.buttonText}>Voltar para Home</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity 
-      style={[styles.button, { backgroundColor: '#dc3545' }]} 
-      onPress={() => navigation.navigate('Scroll')}
-      >
-        <Text style={styles.buttonText}>Voltar para Scroll</Text>
+        <Text style={styles.buttonText}>Adicionar Tarefa</Text>
       </TouchableOpacity>
     </View>
   );
@@ -66,43 +53,34 @@ export default function AddTask({ navigation }:any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
-    alignItems: 'center',
-    justifyContent: 'center',
     padding: 20,
-  },
-  formContainer: {
-    width: '100%',
-    marginBottom: 20,
+    backgroundColor: '#f5f5f5',
+    justifyContent: 'center',
   },
   title: {
     fontSize: 24,
+    marginBottom: 20,
+    textAlign: 'center',
     fontWeight: 'bold',
-    marginBottom: 16,
-    color: '#333',
   },
   input: {
-    width: '100%',
     backgroundColor: '#fff',
+    borderColor: '#ccc',
     borderWidth: 1,
-    borderColor: '#ddd',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    marginBottom: 16,
-    fontSize: 16,
     borderRadius: 8,
+    padding: 12,
+    marginBottom: 15,
+    fontSize: 16,
   },
   button: {
-    width: '100%',
-    paddingVertical: 10,
-    paddingHorizontal: 10,
     backgroundColor: '#28a745',
-    borderRadius: 10,
-    marginBottom: 10,
+    padding: 14,
+    borderRadius: 8,
   },
   buttonText: {
     color: '#fff',
-    fontWeight: 'bold',
     textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });

@@ -50,6 +50,20 @@ export default function HomeScreen({ navigation }: any) {
         );
     };
 
+     useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            const novaTarefa = navigation.getState()?.routes.find((r: { name: string; }) => r.name === 'Home')?.params?.novaTarefa;
+
+            if (novaTarefa) {
+                setTasks(prev => [...prev, novaTarefa]);
+                navigation.setParams({ novaTarefa: null }); 
+            }
+        });
+
+        return unsubscribe;
+    }, [navigation]);
+
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Lista de Tarefa</Text>
