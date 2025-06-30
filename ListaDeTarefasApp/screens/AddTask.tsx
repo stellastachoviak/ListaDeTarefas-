@@ -11,7 +11,7 @@ export default function AddTask({ navigation }:any) {
     };
   },[])
   const handleSubmit = () => {
-    if (nome.trim() && email.trim()) {
+    if (Titulo.trim() && Descricao.trim()) {
       navigation.navigate('Details',{
       mensagem: `Nome submetido: ${nome},Email:${email}`, 
     });
@@ -25,20 +25,25 @@ export default function AddTask({ navigation }:any) {
       
       <Text style={styles.title}>Formulário</Text>
       
+    <View style={styles.formContainer}>
       <TextInput
-        style={styles.input}
-        placeholder="Digite seu nome"
-        value={nome}
-        onChangeText={setNome}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Digite seu email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType='email-address'
+          style={styles.input}
+          placeholder="Título da tarefa"
+          value={Titulo}
+          onChangeText={setTitulo}
       />
 
+      <TextInput
+          style={styles.input}
+          placeholder="Descrição"
+          value={Descricao}
+          onChangeText={setDescricao}
+      />
+
+      <TouchableOpacity style={styles.button} onPress={addTask}>
+          <Text style={styles.buttonText}>Adicionar Tarefa</Text>
+      </TouchableOpacity>
+                </View>
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Enviar</Text>
       </TouchableOpacity>
@@ -67,6 +72,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+  },
+  formContainer: {
+    width: '100%',
+    marginBottom: 20,
   },
   title: {
     fontSize: 24,

@@ -23,6 +23,15 @@ export default function App(){
         options={{title: 'Detalhes',headerStyle:{
         backgroundColor:'#dc3545'},headerTintColor:'#fff'}}
         />
+
+        <Stack.Screen
+        name="AddTask" 
+        component={DetailsScreen}
+        options={{title: 'Detalhes',headerStyle:{
+        backgroundColor:'#dc3545'},headerTintColor:'#fff'}}
+        />
+
+
        
       </Stack.Navigator>
     </NavigationContainer>
