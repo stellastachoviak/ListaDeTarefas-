@@ -15,20 +15,20 @@ export default function App(){
         name="Home" 
         component={HomeScreen}
         options={{title: 'Tela Principal',headerStyle:{
-        backgroundColor:'#007bff'},headerTintColor:'#fff'}}
+        backgroundColor:'pink'},headerTintColor:'#333'}}
         />
         <Stack.Screen
         name="Details" 
         component={DetailsScreen}
         options={{title: 'Detalhes',headerStyle:{
-        backgroundColor:'#dc3545'},headerTintColor:'#fff'}}
+        backgroundColor:'pink'},headerTintColor:'#333'}}
         />
 
         <Stack.Screen
         name="AddTask" 
         component={DetailsScreen}
-        options={{title: 'Detalhes',headerStyle:{
-        backgroundColor:'#dc3545'},headerTintColor:'#fff'}}
+        options={{title: 'AddTask',headerStyle:{
+        backgroundColor:'pink'},headerTintColor:'#333'}}
         />
 
 
