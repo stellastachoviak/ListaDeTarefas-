@@ -5,7 +5,7 @@ import React from "react";
 
 
 
-export default function HomeScreen({ navigation }: any) {
+export default function HomeScreen({ navigation, route }: any) {
     const [tasks, setTasks] = useState([
         { id: '1', title: 'Item 1', description: 'Descrição do item 1', done: false },
         { id: '2', title: 'Item 2', description: 'Descrição do item 2', done: false },
@@ -49,19 +49,15 @@ export default function HomeScreen({ navigation }: any) {
             )
         );
     };
+    
+    useEffect(() => {
+    const novaTarefa = route.params?.novaTarefa;
 
-     useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            const novaTarefa = navigation.getState()?.routes.find((r: { name: string; }) => r.name === 'Home')?.params?.novaTarefa;
-
-            if (novaTarefa) {
-                setTasks(prev => [...prev, novaTarefa]);
-                navigation.setParams({ novaTarefa: null }); 
-            }
-        });
-
-        return unsubscribe;
-    }, [navigation]);
+    if (novaTarefa) {
+        setTasks(prev => [...prev, novaTarefa]);
+        navigation.setParams({ novaTarefa: null }); // limpa para não repetir
+    }
+    }, [route.params]);
 
 
     return (

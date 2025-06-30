@@ -15,6 +15,7 @@ export default function AddTask({ navigation }: any) {
       id: Date.now().toString(),
       title: titulo,
       description: descricao,
+      done:false,
     };
 
     // Volta para a tela Home e envia a nova tarefa
