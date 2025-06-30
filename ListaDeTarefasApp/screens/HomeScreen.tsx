@@ -5,14 +5,15 @@ import React from "react";
 
 
 
+type Task = {
+    id: string;
+    title: string;
+    description: string;
+    done: boolean;
+};
+
 export default function HomeScreen({ navigation }: any) {
-    const [tasks, setTasks] = useState([
-        { id: '1', title: 'Item 1', description: 'Descrição do item 1', done: false },
-        { id: '2', title: 'Item 2', description: 'Descrição do item 2', done: false },
-        { id: '3', title: 'Item 3', description: 'Descrição do item 3', done: false },
-        { id: '4', title: 'Item 4', description: 'Descrição do item 4', done: false },
-        { id: '5', title: 'Item 5', description: 'Descrição do item 5', done: false },
-    ]);
+    const [tasks, setTasks] = useState<Task[]>([]);
     const [newTitle, setNewTitle] = useState('');
     const [newDescription, setNewDescription] = useState('');
 

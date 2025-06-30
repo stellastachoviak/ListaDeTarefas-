@@ -17,10 +17,10 @@ export default function AddTask({ navigation }: any) {
       description: descricao,
     };
 
-    // Volta para a tela Home e envia a nova tarefa
+  
     navigation.navigate('Home', { novaTarefa });
 
-    // Limpa os campos
+  
     setTitulo('');
     setDescricao('');
   }
