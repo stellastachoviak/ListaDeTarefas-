@@ -1,24 +1,22 @@
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert,  } from 'react-native';
 import { useState, useEffect } from 'react';
+import React from 'react';
+
 
 export default function AddTask({ navigation }:any) {
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
+  const [Titulo, setTitulo] = useState('');
+  const [Descricao, setDescricao] = useState('');
   useEffect(()=>{
     console.log('AddTask montada!');
     return()=> {
       console.log('AddTask desmontada!')
     };
   },[])
-  const handleSubmit = () => {
-    if (Titulo.trim() && Descricao.trim()) {
-      navigation.navigate('Details',{
-      mensagem: `Nome submetido: ${nome},Email:${email}`, 
-    });
-    } else {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos!');
-    }
-  };
+  
+
+  function handleSubmit(): void {
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <View style={styles.container}>
@@ -40,7 +38,7 @@ export default function AddTask({ navigation }:any) {
           onChangeText={setDescricao}
       />
 
-      <TouchableOpacity style={styles.button} onPress={addTask}>
+      <TouchableOpacity style={styles.button} onPress={AddTask}>
           <Text style={styles.buttonText}>Adicionar Tarefa</Text>
       </TouchableOpacity>
                 </View>

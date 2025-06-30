@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Alert, TextInput } from "react-native";
 import { useEffect, useState } from 'react';
-
+import AddTask from "./AddTask";
+import React from "react";
 
 
 

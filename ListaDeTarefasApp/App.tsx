@@ -1,9 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./screens/HomeScreen";
-import DetailsScreen from "./screens/DetailsScreens";
-
-
+import DetailsScreen from "./screens/DetailsScreen";
+import AddTask from "./screens/AddTask";
+import React from "react";
 
 const Stack = createStackNavigator();
 
@@ -12,27 +12,32 @@ export default function App(){
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen 
-        name="Home" 
-        component={HomeScreen}
-        options={{title: 'Tela Principal',headerStyle:{
-        backgroundColor:'#007bff'},headerTintColor:'#fff'}}
+          name="Home" 
+          component={HomeScreen}
+          options={{
+            title: 'Tela Principal',
+            headerStyle: { backgroundColor: '#007bff' },
+            headerTintColor: '#fff'
+          }}
         />
         <Stack.Screen
-        name="Details" 
-        component={DetailsScreen}
-        options={{title: 'Detalhes',headerStyle:{
-        backgroundColor:'#dc3545'},headerTintColor:'#fff'}}
+          name="Details" 
+          component={DetailsScreen}
+          options={{
+            title: 'Detalhes',
+            headerStyle: { backgroundColor: '#dc3545' },
+            headerTintColor: '#fff'
+          }}
         />
-
         <Stack.Screen
-        name="AddTask" 
-        component={DetailsScreen}
-        options={{title: 'Detalhes',headerStyle:{
-        backgroundColor:'#dc3545'},headerTintColor:'#fff'}}
+          name="AddTask" 
+          component={AddTask}
+          options={{
+            title: 'Adicionar Tarefa',
+            headerStyle: { backgroundColor: '#28a745' },
+            headerTintColor: '#fff'
+          }}
         />
-
-
-       
       </Stack.Navigator>
     </NavigationContainer>
   )
