@@ -15,7 +15,7 @@ export default function DetailsScreen({ route }: any) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ffe4ed',
         padding: 24,
         justifyContent: 'center',
         alignItems: 'center',

@@ -1,6 +1,5 @@
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Alert } from "react-native";
-import { useEffect, useState } from 'react';
-import React from "react";
+import React, { useState, useEffect } from 'react';
 
 
 
@@ -12,16 +11,19 @@ type Task = {
 };
 
 export default function HomeScreen({ navigation, route }: any) {
-    const [tasks, setTasks] = useState<Task[]>([]);
-    const [newTitle, setNewTitle] = useState('');
-    const [newDescription, setNewDescription] = useState('');
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [showDone, setShowDone] = useState<'all' | 'done' | 'notdone'>('all');
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
 
-    useEffect(() => {
-        if (route?.params?.novaTarefa) {
-            setTasks(prev => [...prev, route.params.novaTarefa]);
-            navigation.setParams({ novaTarefa: null }); // limpa o parâmetro para não adicionar de novo
-        }
-    }, [route?.params?.novaTarefa]);
+  
+  useEffect(() => {
+  if (route?.params?.novaTarefa) {
+    setTasks(prev => [...prev, route.params.novaTarefa]);
+    navigation.setParams({ novaTarefa: null });
+  }
+}, [route?.params?.novaTarefa]);
+
     
     const addTask = () => {
         if (!newTitle.trim()) {
@@ -57,12 +59,42 @@ export default function HomeScreen({ navigation, route }: any) {
     );
   };
 
+  
+  const filteredTasks = tasks.filter(task => {
+    if (showDone === 'all') return true;
+    if (showDone === 'done') return task.done;
+    if (showDone === 'notdone') return !task.done;
+  });
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>𝐋𝐢𝐬𝐭𝐚 𝐃𝐞 𝐓𝐚𝐫𝐞𝐟𝐚𝐬</Text>
+
+      
+      <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+        <TouchableOpacity
+          style={[styles.counterButton, { backgroundColor: showDone === 'all' ? '#ff69b4' : '#fff', marginHorizontal: 2 }]}
+          onPress={() => setShowDone('all')}
+        >
+          <Text style={styles.buttonText}>Todas</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.counterButton, { backgroundColor: showDone === 'done' ? '#ff69b4' : '#fff', marginHorizontal: 2 }]}
+          onPress={() => setShowDone('done')}
+        >
+          <Text style={styles.buttonText}>Concluídas</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.counterButton, { backgroundColor: showDone === 'notdone' ? '#ff69b4' : '#fff', marginHorizontal: 2 }]}
+          onPress={() => setShowDone('notdone')}
+        >
+          <Text style={styles.buttonText}>Pendentes</Text>
+        </TouchableOpacity>
+      </View>
+
       <FlatList
         style={styles.list}
-        data={tasks}
+        data={filteredTasks}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -90,7 +122,7 @@ export default function HomeScreen({ navigation, route }: any) {
                   item.done && { textDecorationLine: 'line-through', color: '#bbb' }
                 ]}
               >
-                {item.description}
+                
               </Text>
               <TouchableOpacity
                 style={styles.removeButton}
@@ -114,7 +146,9 @@ export default function HomeScreen({ navigation, route }: any) {
         <View style={styles.rowButtons}>
           <TouchableOpacity
             style={[styles.counterButton, { backgroundColor: '#9ACD32', flex: 1, marginLeft: 5 }]}
-            onPress={() => navigation.navigate('AddTask')}
+            onPress={() => navigation.navigate('AddTask', {
+              onAddTask: (novaTarefa: any) => setTasks(prev => [...prev, novaTarefa])
+            })}
           >
             <Text style={styles.buttonText}>Adicionar Nova Tarefa</Text>
           </TouchableOpacity>
@@ -142,15 +176,16 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: 'pink',
-    padding: 15,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
+    padding: 10,
+    marginBottom: 6,
+    borderWidth: 2,
+    borderColor: '#ff69b4',
+    borderRadius: 12,
+    shadowColor: '#ff00cc', 
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
+   
   },
   cardTitle: {
     fontSize: 18,

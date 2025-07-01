@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import HomeScreen from './HomeScreen';
 
-export default function AddTask({ navigation }: any) {
+
+export default function AddTask({ navigation, route }: any) {
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
 
@@ -13,16 +15,22 @@ export default function AddTask({ navigation }: any) {
 
     const novaTarefa = {
       id: Date.now().toString(),
-      title: titulo,
-      description: descricao,
+      title: titulo.trim(),
+      description: descricao.trim(),
       done: false,
     };
 
-    navigation.navigate('Home', { novaTarefa });
+    
+    if (route.params?.onAddTask) {
+      route.params.onAddTask(novaTarefa);
+    }
+
+    navigation.goBack();
 
     setTitulo('');
     setDescricao('');
   }
+
 
   return (
     <View style={styles.container}>
