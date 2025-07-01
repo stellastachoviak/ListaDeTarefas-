@@ -26,7 +26,7 @@ export default function AddTask({ navigation }: any) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Adicionar Nova Tarefa</Text>
+      <Text style={styles.title}>𝐀𝐝𝐢𝐜𝐢𝐨𝐧𝐚𝐫 𝐍𝐨𝐯𝐚 𝐭𝐚𝐫𝐞𝐟𝐚</Text>
 
       <TextInput
         style={styles.input}
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#ffe4ed',
     justifyContent: 'center',
   },
   title: {
@@ -73,12 +73,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    backgroundColor: '#28a745',
+    backgroundColor: '#9ACD32',
     padding: 14,
     borderRadius: 8,
   },
   buttonText: {
-    color: '#fff',
+    color: '#333',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 16,

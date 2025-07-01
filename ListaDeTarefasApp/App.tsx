@@ -15,7 +15,7 @@ export default function App(){
           name="Home" 
           component={HomeScreen}
           options={{
-            title: 'Tela Principal',
+            title: 'ＴＡＲＥＦＡＳ',
             headerStyle: { backgroundColor: 'pink' },
             headerTintColor: '#333'
           }}
@@ -33,7 +33,7 @@ export default function App(){
           name="AddTask" 
           component={AddTask}
           options={{
-            title: 'Adicionar Tarefa',
+            title: 'ＮＯＶＡ ＴＡＲＥＦＡ',
             headerStyle: { backgroundColor: 'pink' },
             headerTintColor: '#333'
           }}

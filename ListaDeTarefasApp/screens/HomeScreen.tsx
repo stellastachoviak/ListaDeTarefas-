@@ -11,11 +11,18 @@ type Task = {
     done: boolean;
 };
 
-export default function HomeScreen({ navigation }: any) {
+export default function HomeScreen({ navigation, route }: any) {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [newTitle, setNewTitle] = useState('');
     const [newDescription, setNewDescription] = useState('');
 
+    useEffect(() => {
+        if (route?.params?.novaTarefa) {
+            setTasks(prev => [...prev, route.params.novaTarefa]);
+            navigation.setParams({ novaTarefa: null }); // limpa o parâmetro para não adicionar de novo
+        }
+    }, [route?.params?.novaTarefa]);
+    
     const addTask = () => {
         if (!newTitle.trim()) {
             Alert.alert('Erro', 'O título não pode ser vazio!');
@@ -52,7 +59,7 @@ export default function HomeScreen({ navigation }: any) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Lista de Tarefa</Text>
+      <Text style={styles.title}>𝐋𝐢𝐬𝐭𝐚 𝐃𝐞 𝐓𝐚𝐫𝐞𝐟𝐚𝐬</Text>
       <FlatList
         style={styles.list}
         data={tasks}
