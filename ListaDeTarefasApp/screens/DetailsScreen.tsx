@@ -2,14 +2,14 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 export default function DetailsScreen({ route }: any) {
-    const { task } = route.params;
+  const { task } = route.params;
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>{task.title}</Text>
-            <Text style={styles.description}>{task.description}</Text>
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>{task.title}</Text>
+      <Text style={styles.description}>{task.description}</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

@@ -25,8 +25,8 @@ export default function App(){
           component={DetailsScreen}
           options={{
             title: 'Detalhes',
-            headerStyle: { backgroundColor: 'pink' },
-            headerTintColor: '#333'
+            headerStyle: { backgroundColor: '#dc3545' },
+            headerTintColor: '#fff'
           }}
         />
         <Stack.Screen
