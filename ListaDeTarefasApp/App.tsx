@@ -16,8 +16,8 @@ export default function App(){
           component={HomeScreen}
           options={{
             title: 'Tela Principal',
-            headerStyle: { backgroundColor: 'pink' },
-            headerTintColor: '#333'
+            headerStyle: { backgroundColor: '#007bff' },
+            headerTintColor: '#fff'
           }}
         />
         <Stack.Screen
@@ -25,8 +25,8 @@ export default function App(){
           component={DetailsScreen}
           options={{
             title: 'Detalhes',
-            headerStyle: { backgroundColor: 'pink' },
-            headerTintColor: '#333'
+            headerStyle: { backgroundColor: '#dc3545' },
+            headerTintColor: '#fff'
           }}
         />
         <Stack.Screen
@@ -34,8 +34,8 @@ export default function App(){
           component={AddTask}
           options={{
             title: 'Adicionar Tarefa',
-            headerStyle: { backgroundColor: 'pink' },
-            headerTintColor: '#333'
+            headerStyle: { backgroundColor: '#28a745' },
+            headerTintColor: '#fff'
           }}
         />
       </Stack.Navigator>

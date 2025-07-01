@@ -2,37 +2,16 @@ import { StyleSheet, View, Text, FlatList, TouchableOpacity, Alert } from "react
 import { useEffect, useState } from 'react';
 import React from "react";
 
+export default function HomeScreen({ navigation, route }: any) {
+  const [tasks, setTasks] = useState([]);
 
-
-type Task = {
-    id: string;
-    title: string;
-    description: string;
-    done: boolean;
-};
-
-export default function HomeScreen({ navigation }: any) {
-    const [tasks, setTasks] = useState<Task[]>([]);
-    const [newTitle, setNewTitle] = useState('');
-    const [newDescription, setNewDescription] = useState('');
-
-    const addTask = () => {
-        if (!newTitle.trim()) {
-            Alert.alert('Erro', 'O título não pode ser vazio!');
-            return;
-        }
-        setTasks(prev => [
-            ...prev,
-            {
-                id: Date.now().toString(),
-                title: newTitle,
-                description: newDescription,
-                done: false
-            }
-        ]);
-        setNewTitle('');
-        setNewDescription('');
-    };
+  useEffect(() => {
+    const novaTarefa = route.params?.novaTarefa;
+    if (novaTarefa) {
+      setTasks(prev => [...prev, novaTarefa]);
+      navigation.setParams({ novaTarefa: null });
+    }
+  }, [route.params]);
 
   const removeTask = (id: string) => {
     setTasks(prev => prev.filter(task => task.id !== id));
