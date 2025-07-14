@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
-import HomeScreen from './HomeScreen';
+import CustomInput from '../componentes/CustomImput';
+import CustomButton from '../componentes/CustomButton';
+import axios from 'axios';
+
 
 
 export default function AddTask({ navigation, route }: any) {
@@ -30,33 +33,50 @@ export default function AddTask({ navigation, route }: any) {
     setTitulo('');
     setDescricao('');
   }
-
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>𝐀𝐝𝐢𝐜𝐢𝐨𝐧𝐚𝐫 𝐍𝐨𝐯𝐚 𝐭𝐚𝐫𝐞𝐟𝐚</Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Título"
-        value={titulo}
-        onChangeText={setTitulo}
-      />
-
-      <TextInput
-        style={[styles.input, { height: 100, textAlignVertical: 'top' }]}
-        placeholder="Descrição"
-        value={descricao}
-        onChangeText={setDescricao}
-        multiline
-      />
-
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Adicionar Tarefa</Text>
-      </TouchableOpacity>
-    </View>
-  );
 }
+
+  const handleAddTask = async () => {
+  if (titulo.trim()) {
+    try {
+      const response = await axios.post('https://jsonplaceholder.typicode.com/todos', {
+        titulo,
+        completed: false,
+      });
+      addTask({ titulo, descricao, id: response.data.id.toString() });
+      navigation.goBack();
+    } catch (err) {
+      Alert.alert('Erro', 'Falha ao salvar na API');
+    }
+  } else {
+    Alert.alert('Erro', 'Por favor, insira o título da tarefa.');
+  }
+};
+
+
+return (
+  <View style={styles.container}>
+    <Text style={styles.label}>Título da Tarefa</Text>
+    <CustomInput
+      value={title}
+      onChangeText={(text) => setTitle(text.slice(0, 50))}
+      placeholder="Digite o título da tarefa (máx. 50 caracteres)"
+    />
+    <CustomInput
+      value={description}
+      onChangeText={setDescription}
+      placeholder="Digite a descrição (opcional)"
+      multiline
+    />
+
+    <CustomButton title="Salvar Tarefa" onPress={handleAddTask} color="#007bff" />
+    <CustomButton
+      title="Cancelar"
+      onPress={() => navigation.goBack()}
+      color="#dc3545"
+    />
+  </View>
+);
+
 
 const styles = StyleSheet.create({
   container: {
